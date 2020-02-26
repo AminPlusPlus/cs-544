@@ -8,10 +8,9 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
-import java.time.LocalDate;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.util.*;
 
 
 public class AppBook {
@@ -51,24 +50,28 @@ public class AppBook {
             tx = session.getTransaction();
             session.beginTransaction();
 
+            Calendar cal=Calendar.getInstance();
+            cal.set(2014,05,11);
             //1st book
             Book book1 = new Book("ZeroToOne",
                     "SD3313",
                     "Peter Thiel, Blake Masters",
                     39.30,
-                      new Date(2014,01,12));
-
+                      cal );
+            Calendar cal1=Calendar.getInstance();
+            cal.set(2000,05,21);
             Book book2 = new Book("Nineteen Eighty-Four",
                     "00123312",
                     "George Orwell",
                     54.30,
-                    new Date(1949,06,8));
-
+                    cal1);
+            Calendar cal2=Calendar.getInstance();
+            cal.set(1994,01,04);
             Book book3 = new Book("To Kill A Mockingbird",
                     "SD3313",
                     "Harper Lee",
                     19.30,
-                    new Date(1960,07,11));
+                    cal2);
 
 
             session.persist(book1);

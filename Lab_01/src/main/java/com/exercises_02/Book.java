@@ -1,6 +1,7 @@
 package com.exercises_02;
 
 import javax.persistence.*;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -16,12 +17,12 @@ public class Book {
     private double price;
 
     @Temporal(value = TemporalType.DATE)
-    private Date publish_date;
+    private Calendar publish_date;
 
     public Book() {
     }
 
-    public Book (String title, String ISBN, String author,double price, Date publish_date )
+    public Book (String title, String ISBN, String author,double price, Calendar publish_date )
     {
         this.title = title;
         this.ISBN = ISBN;
@@ -29,6 +30,8 @@ public class Book {
         this.price = price;
         this.publish_date = publish_date;
     }
+
+
 
 
     public int getId() {
@@ -71,11 +74,11 @@ public class Book {
         this.price = price;
     }
 
-    public Date getPublish_date() {
+    public Calendar getPublish_date() {
         return publish_date;
     }
 
-    public void setPublish_date(Date publish_date) {
+    public void setPublish_date(Calendar publish_date) {
 
         this.publish_date = publish_date;
     }
@@ -89,7 +92,7 @@ public class Book {
                 ", ISBN='" + ISBN + '\'' +
                 ", author='" + author + '\'' +
                 ", price=" + price +
-                ", publish_date=" + publish_date +
+                ", publish_date=" + publish_date.getTime() +
                 '}';
     }
 }
