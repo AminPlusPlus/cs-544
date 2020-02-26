@@ -35,6 +35,10 @@ public class AppBook {
         add3Books();
         //retrieve books
         fetchBooks();
+        //retrieve book update and delete next one
+        retrieveABookUpdateDelete();
+        //retrieve books
+        fetchBooks();
 
     }
 
@@ -65,6 +69,7 @@ public class AppBook {
                     "Harper Lee",
                     19.30,
                     new Date(1960,07,11));
+
 
             session.persist(book1);
             session.persist(book2);
@@ -116,4 +121,40 @@ public class AppBook {
             }
         }
     }
+
+    //retrieve book update delete
+    private static void retrieveABookUpdateDelete(){
+        Session session = null;
+        Transaction tx = null;
+        try {
+            session = sessionFactory.openSession();
+            tx = session.getTransaction();
+            session.beginTransaction();
+
+            //get update book
+            Book book = (Book) session.get(Book.class,1);
+            book.setTitle("One to Zero");
+            book.setPrice(55.0);
+
+            //get Book 3
+            Book book3 = (Book) session.get(Book.class, 3);
+            //delete
+            session.delete(book3);
+
+            tx.commit();
+
+
+        } catch (HibernateException e) {
+            if (tx != null) {
+                System.err.println("Rolling back: " + e.getMessage());
+                tx.rollback();
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
+
+
 }
