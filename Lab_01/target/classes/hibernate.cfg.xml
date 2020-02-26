@@ -23,6 +23,7 @@
 
 		<!-- Mapping files -->
 		<mapping class="com.exercises_01.Car" />
+		<mapping class="com.exercises_02.Book"/>
 
 	</session-factory>
 </hibernate-configuration>
