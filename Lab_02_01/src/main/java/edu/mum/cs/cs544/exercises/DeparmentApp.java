@@ -35,7 +35,7 @@ public class DeparmentApp {
             tx = session.beginTransaction();
 
             Employee employee = new Employee("Amin");
-            Employee employee1 = new Employee("Maryam");
+            Employee employee1 = new Employee( "Maryam");
             Employee employee2 = new Employee("Jack");
 
             Employee employee4 = new Employee("Ali");
@@ -50,6 +50,10 @@ public class DeparmentApp {
 
             session.persist(department);
             session.persist(department1);
+
+            Employee emp1 = (Employee) session.merge(employee);
+            session.delete(emp1);
+
 
             tx.commit();
 
