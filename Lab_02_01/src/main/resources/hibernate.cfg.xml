@@ -28,6 +28,9 @@
 		<mapping class="edu.mum.cs.cs544.exercises.models.Employee"/>
 		<mapping class="edu.mum.cs.cs544.exercises.models.Publisher"/>
 		<mapping class="edu.mum.cs.cs544.exercises.models.Student"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.Customer"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.Reservation"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.Office"/>
 
 	</session-factory>
 </hibernate-configuration>

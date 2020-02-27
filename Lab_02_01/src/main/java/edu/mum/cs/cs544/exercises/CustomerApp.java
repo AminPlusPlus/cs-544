@@ -1,7 +1,6 @@
 package edu.mum.cs.cs544.exercises;
 
-import edu.mum.cs.cs544.exercises.models.Course;
-import edu.mum.cs.cs544.exercises.models.Student;
+import edu.mum.cs.cs544.exercises.models.*;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,9 +9,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.util.Calendar;
 import java.util.List;
 
-public class StudentApp {
+public class CustomerApp {
 
     private static final SessionFactory sessionFactory;
     private static final ServiceRegistry serviceRegistry;
@@ -34,22 +34,21 @@ public class StudentApp {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
 
-            Student student = new Student("James","Khan");
-            Student student1 = new Student("Shiraz","Alexey");
+            Customer customer = new Customer("Donald Trump");
 
-            Course course = new Course(544,"EA");
-            Course course1 = new Course(344,"MPP");
-            Course course2 = new Course(244,"FPP");
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(2020,02,20);
 
-            student.addCourse(course);
-            student.addCourse(course1);
-            student.addCourse(course2);
+            Reservation reservation = new Reservation(calendar);
+            customer.addReservation(reservation);
 
-            student1.addCourse(course);
-            student1.addCourse(course2);
+            Book book = new Book("HelloBye");
+            Publisher publisher = new Publisher("James Khonan");
+            book.addAuthor(publisher);
+            reservation.setBook(book);
 
-            session.persist(student);
-            session.persist(student1);
+            session.persist(customer);
+
 
             tx.commit();
 
@@ -68,8 +67,8 @@ public class StudentApp {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
 
-            List<Student> departmentList = session
-                    .createQuery("from Student").list();
+            List<Customer> departmentList = session
+                    .createQuery("from Customer").list();
 
             departmentList.forEach(System.out::println);
 
@@ -92,5 +91,4 @@ public class StudentApp {
         sessionFactory.close();
         //System.exit(0);
     }
-
 }

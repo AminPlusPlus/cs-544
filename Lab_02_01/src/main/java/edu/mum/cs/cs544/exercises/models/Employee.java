@@ -16,6 +16,13 @@ public class Employee {
             CascadeType.REFRESH})
     private Department department;
 
+    //if employee removed do not remove a Office
+    @ManyToOne(cascade = {CascadeType.PERSIST,
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH})
+    private Office office;
+
     public Employee(){}
 
 
@@ -45,6 +52,15 @@ public class Employee {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+
+    public Office getOffice() {
+        return office;
+    }
+
+    public void setOffice(Office office) {
+        this.office = office;
     }
 
     @Override

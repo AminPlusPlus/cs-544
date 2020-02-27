@@ -4,20 +4,20 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
-public class Department {
+public class Customer {
     @Id
     @GeneratedValue
     private int id;
     private String name;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Reservation> reservationList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    List<Employee> employees = new ArrayList<>();
-
-    public Department() {
+    public Customer() {
     }
 
-    public Department(String name){
+    public Customer(String name) {
         this.name = name;
     }
 
@@ -25,7 +25,7 @@ public class Department {
         return id;
     }
 
-    private void setId(int id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -37,25 +37,25 @@ public class Department {
         this.name = name;
     }
 
-    public List<Employee> getEmployees() {
-        return employees;
+    public List<Reservation> getReservationList() {
+        return reservationList;
     }
 
-    public void setEmployees(List<Employee> employees) {
-        this.employees = employees;
+    public void setReservationList(List<Reservation> reservationList) {
+        this.reservationList = reservationList;
     }
 
-    public void addEmployee(Employee employee){
-        employee.setDepartment(this);
-        employees.add(employee);
+    public void addReservation(Reservation reservation){
+        reservationList.add(reservation);
     }
+
 
     @Override
     public String toString() {
-        return "Department{" +
+        return "Customer{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", employees=" + employees +
+                ", reservationList=" + reservationList +
                 '}';
     }
 }

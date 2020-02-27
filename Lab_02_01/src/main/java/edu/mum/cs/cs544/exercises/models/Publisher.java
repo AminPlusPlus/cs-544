@@ -1,8 +1,6 @@
 package edu.mum.cs.cs544.exercises.models;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Publisher {

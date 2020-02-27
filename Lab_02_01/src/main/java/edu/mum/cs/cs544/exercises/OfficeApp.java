@@ -1,7 +1,8 @@
 package edu.mum.cs.cs544.exercises;
 
-import edu.mum.cs.cs544.exercises.models.Course;
-import edu.mum.cs.cs544.exercises.models.Student;
+import edu.mum.cs.cs544.exercises.models.Department;
+import edu.mum.cs.cs544.exercises.models.Employee;
+import edu.mum.cs.cs544.exercises.models.Office;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,10 +11,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class StudentApp {
-
+public class OfficeApp {
     private static final SessionFactory sessionFactory;
     private static final ServiceRegistry serviceRegistry;
 
@@ -34,22 +35,23 @@ public class StudentApp {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
 
-            Student student = new Student("James","Khan");
-            Student student1 = new Student("Shiraz","Alexey");
+            Employee employee = new Employee("Amin");
+            Employee employee1 = new Employee("Maryam");
+            Employee employee2 = new Employee("Jack");
 
-            Course course = new Course(544,"EA");
-            Course course1 = new Course(344,"MPP");
-            Course course2 = new Course(244,"FPP");
+            Department department = new Department("Technical");
+            Office office = new Office(212,"Cupertino");
 
-            student.addCourse(course);
-            student.addCourse(course1);
-            student.addCourse(course2);
+            department.addEmployee(employee);
+            department.addEmployee(employee1);
+            department.addEmployee(employee2);
 
-            student1.addCourse(course);
-            student1.addCourse(course2);
+            office.addEmployee(employee);
+            office.addEmployee(employee2);
 
-            session.persist(student);
-            session.persist(student1);
+            session.persist(department);
+            session.persist(office);
+
 
             tx.commit();
 
@@ -68,11 +70,10 @@ public class StudentApp {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
 
-            List<Student> departmentList = session
-                    .createQuery("from Student").list();
+            List<Department> departmentList = session
+                    .createQuery("from Department").list();
 
             departmentList.forEach(System.out::println);
-
 
 
             tx.commit();
@@ -92,5 +93,4 @@ public class StudentApp {
         sessionFactory.close();
         //System.exit(0);
     }
-
 }

@@ -2,7 +2,9 @@ package edu.mum.cs.cs544.exercises.models;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Course {
@@ -14,7 +16,7 @@ public class Course {
     private String name;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
-    private List<Student> students = new ArrayList<>();
+    private Set<Student> students = new HashSet<>();
 
     public Course() {
     }
@@ -48,20 +50,30 @@ public class Course {
         this.name = name;
     }
 
-    public List<Student> getStudents() {
+    public Set<Student> getStudents() {
         return students;
     }
 
-    public void setStudents(List<Student> students) {
+    public void setStudents(Set<Student> students) {
         this.students = students;
     }
 
     public void addStudent (Student student) {
+        student.addCourse(this);
         this.students.add(student);
     }
 
     public void removeStudent(Student student)
     {
         this.students.remove(student);
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", courseNumber=" + courseNumber +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

@@ -57,4 +57,13 @@ public class Book {
         authors.remove(publisher);
     }
 
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "isbn=" + isbn +
+                ", title='" + title + '\'' +
+                ", authors=" + authors +
+                '}';
+    }
 }
