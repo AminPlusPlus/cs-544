@@ -1,35 +1,34 @@
 package edu.mum.cs.cs544.exercises.models;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-public class Employee {
+public class Student {
+
     @Id
     @GeneratedValue
-    private int id;
+    private Integer id;
     private String firstname;
     private String lastname;
 
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-    Set<Laptop> laptops = new HashSet<>();
 
-    public Employee() {
+    @ManyToOne
+    private School school;
+
+    public Student() {
     }
 
-    public Employee(String firstname, String lastname, Laptop laptop) {
+    public Student(String firstname, String lastname) {
+
         this.firstname = firstname;
         this.lastname = lastname;
-        laptop.setEmployee(this);
-        this.laptops.add(laptop);
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    private void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -49,27 +48,12 @@ public class Employee {
         this.lastname = lastname;
     }
 
-    public Set<Laptop> getLaptops() {
-        return laptops;
-    }
-
-    public void setLaptops(Set<Laptop> laptops) {
-        this.laptops = laptops;
-    }
-
-    public void addLaptop(Laptop laptop){
-        laptop.setEmployee(this);
-        laptops.add(laptop);
-    }
-
-
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Student{" +
                 "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
-                "laptops="+ laptops+
                 '}';
     }
 }

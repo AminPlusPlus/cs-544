@@ -1,7 +1,7 @@
 package edu.mum.cs.cs544.exercises;
 
-import edu.mum.cs.cs544.exercises.models.Employee;
-import edu.mum.cs.cs544.exercises.models.Laptop;
+import edu.mum.cs.cs544.exercises.models.Flight;
+import edu.mum.cs.cs544.exercises.models.Passenger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,10 +10,10 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.util.Calendar;
 import java.util.List;
 
-public class EmployeeApp {
-
+public class PassengerApp {
 
     private static final SessionFactory sessionFactory;
     private static final ServiceRegistry serviceRegistry;
@@ -35,15 +35,20 @@ public class EmployeeApp {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
 
-            Laptop laptop = new Laptop("Mac","Ultrabook");
-            Laptop laptop1 = new Laptop("HP","Notebook");
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(2020,05,20);
+
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.set(2020,05,22);
+
+            Flight flight = new Flight("SZ233","Dushanbe","New York",calendar);
+            Flight flight1 = new Flight("WF1333","Belin","Moscow",calendar);
 
 
-            Employee employee = new Employee("Amin","Abdullo",laptop);
-            employee.addLaptop(laptop1);
-            session.persist(employee);
+            Passenger passenger = new Passenger("Aminjon Abdullozoda",flight);
+            passenger.addFlight(flight1);
 
-
+            session.persist(passenger);
 
 
             tx.commit();
@@ -63,8 +68,7 @@ public class EmployeeApp {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
 
-            List<Employee> departmentList = session
-                    .createQuery("from Employee").list();
+            List<Passenger> departmentList = session .createQuery("from Passenger").list();
 
             departmentList.forEach(System.out::println);
 

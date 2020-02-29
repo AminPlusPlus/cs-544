@@ -3,6 +3,7 @@ package edu.mum.cs.cs544.exercises.models;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Laptop {
@@ -12,6 +13,8 @@ public class Laptop {
     private String brand;
     private String type;
 
+    //key foreign of the employee
+    @ManyToOne
     private Employee employee;
 
     public Laptop() {
@@ -52,5 +55,14 @@ public class Laptop {
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
+    }
+
+    @Override
+    public String toString() {
+        return "Laptop{" +
+                "id=" + id +
+                ", brand='" + brand + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

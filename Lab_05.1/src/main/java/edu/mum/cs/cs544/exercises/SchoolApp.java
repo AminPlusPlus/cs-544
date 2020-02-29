@@ -1,7 +1,5 @@
 package edu.mum.cs.cs544.exercises;
 
-import edu.mum.cs.cs544.exercises.models.Employee;
-import edu.mum.cs.cs544.exercises.models.Laptop;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,9 +10,7 @@ import org.hibernate.service.ServiceRegistry;
 
 import java.util.List;
 
-public class EmployeeApp {
-
-
+public class SchoolApp {
     private static final SessionFactory sessionFactory;
     private static final ServiceRegistry serviceRegistry;
 
@@ -35,15 +31,12 @@ public class EmployeeApp {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
 
-            Laptop laptop = new Laptop("Mac","Ultrabook");
-            Laptop laptop1 = new Laptop("HP","Notebook");
 
-
-            Employee employee = new Employee("Amin","Abdullo",laptop);
-            employee.addLaptop(laptop1);
+            Person employee = new Employee("Amin","Abdullo",100);
+            Person employee1 = new Employee("Said","Vali",500);
+            employee.setSaving("saving hello");
             session.persist(employee);
-
-
+            session.persist(employee1);
 
 
             tx.commit();
@@ -63,12 +56,9 @@ public class EmployeeApp {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
 
-            List<Employee> departmentList = session
-                    .createQuery("from Employee").list();
+            List<Person> departmentList = session .createQuery("from Person").list();
 
             departmentList.forEach(System.out::println);
-
-
 
             tx.commit();
 

@@ -22,12 +22,11 @@
 		<property name="hbm2ddl.auto">create</property>
 
 		<!-- Mapping files -->
-		<mapping class="edu.mum.cs.cs544.exercises.models.Employee"/>
-		<mapping class="edu.mum.cs.cs544.exercises.models.Laptop"/>
-		<mapping class="edu.mum.cs.cs544.exercises.models.Flight"/>
-		<mapping class="edu.mum.cs.cs544.exercises.models.Passenger"/>
-		<mapping class="edu.mum.cs.cs544.exercises.models.School"/>
-		<mapping class="edu.mum.cs.cs544.exercises.models.Student"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.Customer"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.Order"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.OrderLine"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.Product"/>
+
 
 	</session-factory>
 </hibernate-configuration>

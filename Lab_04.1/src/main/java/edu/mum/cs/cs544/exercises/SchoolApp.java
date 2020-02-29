@@ -1,7 +1,9 @@
 package edu.mum.cs.cs544.exercises;
 
-import edu.mum.cs.cs544.exercises.models.Employee;
-import edu.mum.cs.cs544.exercises.models.Laptop;
+import edu.mum.cs.cs544.exercises.models.Flight;
+import edu.mum.cs.cs544.exercises.models.Passenger;
+import edu.mum.cs.cs544.exercises.models.School;
+import edu.mum.cs.cs544.exercises.models.Student;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -10,11 +12,12 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class EmployeeApp {
-
-
+public class SchoolApp {
     private static final SessionFactory sessionFactory;
     private static final ServiceRegistry serviceRegistry;
 
@@ -35,15 +38,14 @@ public class EmployeeApp {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
 
-            Laptop laptop = new Laptop("Mac","Ultrabook");
-            Laptop laptop1 = new Laptop("HP","Notebook");
+            Student student = new Student("Amin","Abdullo");
+            Student student1 = new Student("Jim Kerry","Hello");
+            Student student2 = new Student("Maryam","Khayom");
 
+            School school =  new School("54",student);
+            //school.setStudentMap(sts1);
 
-            Employee employee = new Employee("Amin","Abdullo",laptop);
-            employee.addLaptop(laptop1);
-            session.persist(employee);
-
-
+            session.persist(school);
 
 
             tx.commit();
@@ -63,12 +65,9 @@ public class EmployeeApp {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
 
-            List<Employee> departmentList = session
-                    .createQuery("from Employee").list();
+            List<School> departmentList = session .createQuery("from School").list();
 
             departmentList.forEach(System.out::println);
-
-
 
             tx.commit();
 
