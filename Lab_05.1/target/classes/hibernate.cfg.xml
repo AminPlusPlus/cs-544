@@ -22,8 +22,13 @@
 		<property name="hbm2ddl.auto">create</property>
 
 		<!-- Mapping files -->
-		<mapping class="edu.mum.cs.cs544.exercises.models.Employee"/>
-		<mapping class="edu.mum.cs.cs544.exercises.models.Person"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.Customer"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.Order"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.OrderLine"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.Product"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.Book"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.CD"/>
+		<mapping class="edu.mum.cs.cs544.exercises.models.DVD"/>
 
 
 	</session-factory>
