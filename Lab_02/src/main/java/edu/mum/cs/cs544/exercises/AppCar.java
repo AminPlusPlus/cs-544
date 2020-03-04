@@ -1,5 +1,6 @@
 package edu.mum.cs.cs544.exercises;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.HibernateException;
@@ -32,14 +33,15 @@ public class AppCar {
             session = sessionFactory.openSession();
             tx = session.beginTransaction();
 
-            Owner ownerCar  = new Owner("Hello" , "Bye");
-            // Create new instance of Car and set values in it
-            Car car1 = new Car("BMW", "SDA231", 30221.00,ownerCar);
-            // Create new instance of Car and set values in it
-            Car car2 = new Car("Mercedes", "HOO100", 4088.00,ownerCar);
+            List<Address> addresses = new ArrayList<>();
+            addresses.add(new Address("Kulob"));
+            addresses.add(new Address("Andijoni"));
 
-            session.persist(car1);
-            session.persist(car2);
+            User user = new User("Amin",addresses);
+
+            session.persist(user);
+
+
 
             tx.commit();
 
@@ -60,7 +62,7 @@ public class AppCar {
 
             // retieve all cars
             @SuppressWarnings("unchecked")
-            List<Car> owner1List = session.createQuery("from Car").list();
+            List<User> owner1List = session.createQuery("from User").list();
             owner1List.forEach(System.out::println);
 
             tx.commit();

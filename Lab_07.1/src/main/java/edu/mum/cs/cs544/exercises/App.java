@@ -91,6 +91,31 @@ public class App {
             }
         }
 
+        // b-c) All airlines that use A380 airplanes
+        try {
+            session = sessionFactory.openSession();
+            tx = session.beginTransaction();
+
+
+            @SuppressWarnings("unchecked")
+            List<Airport> airlines = session.createQuery("select a from Airport a join a.arrivals b where b.airplane.model = 'A380' and a.city <> 'Chicago'  ").list();
+
+            System.out.println("B-C : Airlines:");
+            for (Airport airline : airlines) {
+                System.out.printf("%-15s\n", airline.getName());
+            }
+            tx.commit();
+        } catch (HibernateException e) {
+            if (tx != null) {
+                tx.rollback();
+                e.printStackTrace(System.err);
+            }
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+
         // c) Flights using 747 planes that don't belong to Star Alliance
         try {
             session = sessionFactory.openSession();
