@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="bookservice" class="cs544.exercise11_3.BookService">
+    <constructor-arg >
+        <list>
+            <ref bean="ebooks"/>
+            <ref bean="barnesAndNoble"/>
+            <ref bean="amazon"/>
+            <ref bean="border"/>
+        </list>
+    </constructor-arg>
+    </bean>
+
+    <bean id="ebooks" class="cs544.exercise11_3.EBooks"/>
+    <bean id="barnesAndNoble" class="cs544.exercise11_3.BarnesAndNoble"/>
+    <bean id="amazon" class="cs544.exercise11_3.Amazon"/>
+    <bean id="border" class="cs544.exercise11_3.Borders"/>
+</beans>
