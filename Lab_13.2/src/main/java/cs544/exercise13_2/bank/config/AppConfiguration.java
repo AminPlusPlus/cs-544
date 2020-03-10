@@ -13,4 +13,6 @@ import org.springframework.context.annotation.Import;
 @Import({Daoconfig.class,Jmsconfig.class})
 public class AppConfiguration {
 
+
+
 }
