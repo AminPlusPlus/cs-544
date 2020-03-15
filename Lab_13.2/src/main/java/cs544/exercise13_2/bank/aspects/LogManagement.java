@@ -40,4 +40,20 @@ public class LogManagement {
         logger.log("JMS SENT");
     }
 
+    @Around("execution(* cs544.exercise13_2.bank.domain.Calculator.add(..))")
+    public Object aroundCalculator (ProceedingJoinPoint call) throws Throwable {
+        Object[] args = call.getArgs();
+        int x = (Integer)args[0];
+        int y = (Integer)args[1];
+        System.out.println("CalcAdvice.changeNumbers: x= "+x+"and y= "+y);
+
+        args[0]=5;
+        args[1]=9;
+        Object object= call.proceed(args);
+
+        System.out.println("CalcAdvice.changeNumbers: call.proceed returns "+object);
+        return object;
+
+    }
+
 }
